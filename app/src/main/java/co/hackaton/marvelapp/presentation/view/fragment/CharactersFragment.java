@@ -1,14 +1,16 @@
 package co.hackaton.marvelapp.presentation.view.fragment;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import co.hackaton.marvelapp.R;
+import co.hackaton.marvelapp.presentation.view.adapter.CharacterAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,12 +21,9 @@ import co.hackaton.marvelapp.R;
  * create an instance of this fragment.
  */
 public class CharactersFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
     private OnFragmentInteractionListener mListener;
+    private RecyclerView recyclerCharacters;
 
     public CharactersFragment() {
         // Required empty public constructor
@@ -52,7 +51,19 @@ public class CharactersFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_characters, container, false);
+        View view = inflater.inflate(R.layout.fragment_characters, container, false);
+        recyclerCharacters = view.findViewById(R.id.recyclerCharacters);
+
+        String[] testData = new String[]{
+                "Character 1", "Character 2", "Character 3", "Character 4", "Character 5", "Character 6"
+        };
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+        recyclerCharacters.setLayoutManager(gridLayoutManager);
+
+        CharacterAdapter adapter = new CharacterAdapter(testData);
+        recyclerCharacters.setAdapter(adapter);
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
