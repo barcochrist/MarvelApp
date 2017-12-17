@@ -4,10 +4,9 @@
     android:layout_height="match_parent"
     tools:context="co.hackaton.marvelapp.presentation.view.fragment.SeriesFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/section_format" />
+        android:text="@string/title_section3" />
 
 </FrameLayout>
