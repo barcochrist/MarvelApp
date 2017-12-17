@@ -1,14 +1,16 @@
 package co.hackaton.marvelapp.presentation.view.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import co.hackaton.marvelapp.R;
+import co.hackaton.marvelapp.presentation.view.activity.DetailActivity;
 
 /**
  * Created by christianbarco on 17/12/17.
@@ -39,7 +41,7 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
         return mDataset.length;
     }
 
-    public class CharacterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class CharacterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public TextView tv;
         public ImageView imageViewCharacter;
@@ -48,13 +50,17 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
             super(itemView);
             tv = itemView.findViewById(R.id.tv);
             imageViewCharacter = itemView.findViewById(R.id.imageViewCharacter);
+
+            imageViewCharacter.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            Context context = v.getContext();
+            switch (v.getId()) {
                 case R.id.imageViewCharacter:
-                    Toast.makeText(v.getContext(), "Clicked Country Position", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(context, DetailActivity.class);
+                    context.startActivity(intent);
                     break;
             }
         }
