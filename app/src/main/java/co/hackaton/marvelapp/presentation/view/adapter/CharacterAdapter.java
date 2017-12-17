@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import co.hackaton.marvelapp.R;
 
@@ -38,7 +39,7 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
         return mDataset.length;
     }
 
-    public class CharacterViewHolder extends RecyclerView.ViewHolder {
+    public class CharacterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public TextView tv;
         public ImageView imageViewCharacter;
@@ -47,6 +48,15 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
             super(itemView);
             tv = itemView.findViewById(R.id.tv);
             imageViewCharacter = itemView.findViewById(R.id.imageViewCharacter);
+        }
+
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.imageViewCharacter:
+                    Toast.makeText(v.getContext(), "Clicked Country Position", Toast.LENGTH_SHORT).show();
+                    break;
+            }
         }
     }
 }

@@ -55,6 +55,8 @@ public class CharactersFragment extends Fragment {
         recyclerCharacters = view.findViewById(R.id.recyclerCharacters);
 
         String[] testData = new String[]{
+                "Character 1", "Character 2", "Character 3", "Character 4", "Character 5", "Character 6",
+                "Character 1", "Character 2", "Character 3", "Character 4", "Character 5", "Character 6",
                 "Character 1", "Character 2", "Character 3", "Character 4", "Character 5", "Character 6"
         };
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
