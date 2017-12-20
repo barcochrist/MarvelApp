@@ -18,7 +18,7 @@ public class CharacterRepoImpl implements CharacterRepository {
 
 
    public interface CharacterService{
-       @GET("characters?limit=2&apikey="+ Constants.API_KEY)
+       @GET("characters?limit=1&ts=1&apikey="+ Constants.API_KEY+"&hash="+Constants.HASH)
        Call<List<Character>> characterList();
 
    }

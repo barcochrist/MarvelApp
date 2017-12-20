@@ -17,6 +17,6 @@ public interface CharacterListContract {
     }
 
     interface UserActionListener{
-        List<Character> getList();
+        void getList();
     }
 }

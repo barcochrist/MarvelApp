@@ -9,9 +9,11 @@ public class Character {
     private int id;
     private String name ;
     private String description ;
-    private String thumbnail ;
+    private Thumbnail thumbnail ;
 
-    public Character(int id, String name, String description, String image) {
+
+
+    public Character(int id, String name, String description, Thumbnail image) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -42,11 +44,11 @@ public class Character {
         this.description = description;
     }
 
-    public String getthumbnail() {
+    public Thumbnail getthumbnail() {
         return thumbnail;
     }
 
-    public void setthumbnail(String thumbnail) {
+    public void setThumbnail(Thumbnail thumbnail) {
         this.thumbnail = thumbnail;
     }
 }

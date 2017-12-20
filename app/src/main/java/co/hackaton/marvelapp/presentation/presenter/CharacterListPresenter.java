@@ -1,6 +1,6 @@
 package co.hackaton.marvelapp.presentation.presenter;
 
-import java.io.LineNumberInputStream;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class CharacterListPresenter implements CharacterListContract.UserActionL
     }
 
     @Override
-    public List<Character> getList() {
+    public void getList() {
 
         showCharacterList.getList(new Callback<List<Character>>() {
             @Override
@@ -40,9 +40,10 @@ public class CharacterListPresenter implements CharacterListContract.UserActionL
 
             @Override
             public void error(Exception error) {
+
                 view.showErrorMessage(error);
             }
         });
-        return null;
+
     }
 }
