@@ -7,13 +7,14 @@ package co.hackaton.marvelapp.domain.model;
 public class Character {
 
     private int id;
-    private String name ;
-    private String description ;
-    private Thumbnail thumbnail ;
+    private String name;
+    private String description;
+    private String thumbnail;
 
+    public Character() {
+    }
 
-
-    public Character(int id, String name, String description, Thumbnail image) {
+    public Character(int id, String name, String description, String image) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -44,11 +45,11 @@ public class Character {
         this.description = description;
     }
 
-    public Thumbnail getthumbnail() {
+    public String getthumbnail() {
         return thumbnail;
     }
 
-    public void setThumbnail(Thumbnail thumbnail) {
+    public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
     }
 }

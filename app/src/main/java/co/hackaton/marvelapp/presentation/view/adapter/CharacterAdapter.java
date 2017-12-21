@@ -9,7 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+
 import co.hackaton.marvelapp.R;
+import co.hackaton.marvelapp.domain.model.Character;
 import co.hackaton.marvelapp.presentation.view.activity.DetailActivity;
 
 /**
@@ -17,10 +22,10 @@ import co.hackaton.marvelapp.presentation.view.activity.DetailActivity;
  */
 
 public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder> {
-    private String[] mDataset;
+    private ArrayList<Character> characters;
 
-    public CharacterAdapter(String[] myDataset) {
-        mDataset = myDataset;
+    public CharacterAdapter(ArrayList<Character> characters) {
+        this.characters = characters;
     }
 
     @Override
@@ -33,12 +38,16 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
 
     @Override
     public void onBindViewHolder(CharacterViewHolder holder, int position) {
-        holder.tv.setText(mDataset[position]);
+        holder.tv.setText(characters.get(position).getName());
+        Picasso.with(holder.itemView.getContext())
+                .load(characters.get(position).getthumbnail())
+                .resize(200,200)
+                .into(holder.imageViewCharacter);
     }
 
     @Override
     public int getItemCount() {
-        return mDataset.length;
+        return characters.size();
     }
 
     public class CharacterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -50,7 +59,6 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
             super(itemView);
             tv = itemView.findViewById(R.id.tv);
             imageViewCharacter = itemView.findViewById(R.id.imageViewCharacter);
-
             imageViewCharacter.setOnClickListener(this);
         }
 
