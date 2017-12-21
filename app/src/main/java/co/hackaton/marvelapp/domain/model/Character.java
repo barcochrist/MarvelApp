@@ -11,6 +11,9 @@ public class Character {
     private String description ;
     private String thumbnail ;
 
+    public Character() {
+    }
+
     public Character(int id, String name, String description, String image) {
         this.id = id;
         this.name = name;
