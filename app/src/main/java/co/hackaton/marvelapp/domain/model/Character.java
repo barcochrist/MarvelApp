@@ -45,11 +45,21 @@ public class Character {
         this.description = description;
     }
 
-    public String getthumbnail() {
+    public String getThumbnail() {
         return thumbnail;
     }
 
     public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
+    }
+
+    @Override
+    public String toString() {
+        return "Character{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", thumbnail='" + thumbnail + '\'' +
+                '}';
     }
 }

@@ -1,4 +1,4 @@
-package co.hackaton.marvelapp.repository;
+package co.hackaton.marvelapp.domain.usecase;
 
 import java.util.List;
 
@@ -6,12 +6,12 @@ import co.hackaton.marvelapp.domain.model.Character;
 import co.hackaton.marvelapp.helpers.Callback;
 
 /**
- * Created by casa on 16/12/17.
+ * Created by christianbarco on 23/12/17.
  */
 
-public interface CharacterRepository {
-
-    void getByID(Integer id, Callback<Character> callback);
+public interface CharacterUserCase {
 
     void getAll(Callback<List<Character>> callback);
+
+    void getByID(Integer id, Callback<Character> callback);
 }

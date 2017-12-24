@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import co.hackaton.marvelapp.R;
 import co.hackaton.marvelapp.domain.model.Character;
@@ -22,9 +22,9 @@ import co.hackaton.marvelapp.presentation.view.activity.DetailActivity;
  */
 
 public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder> {
-    private ArrayList<Character> characters;
+    private List<Character> characters;
 
-    public CharacterAdapter(ArrayList<Character> characters) {
+    public CharacterAdapter(List<Character> characters) {
         this.characters = characters;
     }
 
@@ -40,8 +40,8 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
     public void onBindViewHolder(CharacterViewHolder holder, int position) {
         holder.tv.setText(characters.get(position).getName());
         Picasso.with(holder.itemView.getContext())
-                .load(characters.get(position).getthumbnail())
-                .resize(200,200)
+                .load(characters.get(position).getThumbnail())
+                .resize(200, 200)
                 .into(holder.imageViewCharacter);
     }
 
