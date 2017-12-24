@@ -1,10 +1,12 @@
 package co.hackaton.marvelapp.domain.model;
 
+import java.io.Serializable;
+
 /**
  * Created by casa on 14/12/17.
  */
 
-public class Character {
+public class Character implements Serializable {
 
     private int id;
     private String name;

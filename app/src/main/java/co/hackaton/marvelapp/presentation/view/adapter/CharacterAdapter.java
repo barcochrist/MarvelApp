@@ -2,6 +2,7 @@ package co.hackaton.marvelapp.presentation.view.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,11 +39,8 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
 
     @Override
     public void onBindViewHolder(CharacterViewHolder holder, int position) {
-        holder.tv.setText(characters.get(position).getName());
-        Picasso.with(holder.itemView.getContext())
-                .load(characters.get(position).getThumbnail())
-                .resize(200, 200)
-                .into(holder.imageViewCharacter);
+        Character character = characters.get(position);
+        holder.bindCharacter(character);
     }
 
     @Override
@@ -52,25 +50,34 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
 
     public class CharacterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public TextView tv;
+        public TextView textViewName;
         public ImageView imageViewCharacter;
+        private Character character;
 
         public CharacterViewHolder(View itemView) {
             super(itemView);
-            tv = itemView.findViewById(R.id.tv);
+            textViewName = itemView.findViewById(R.id.textViewName);
             imageViewCharacter = itemView.findViewById(R.id.imageViewCharacter);
-            imageViewCharacter.setOnClickListener(this);
+            itemView.setOnClickListener(this);
+        }
+
+        public void bindCharacter(Character character) {
+            this.character = character;
+            textViewName.setText(character.getName());
+            Picasso.with(this.itemView.getContext())
+                    .load(character.getThumbnail())
+                    .resize(200, 200)
+                    .into(imageViewCharacter);
         }
 
         @Override
         public void onClick(View v) {
             Context context = v.getContext();
-            switch (v.getId()) {
-                case R.id.imageViewCharacter:
-                    Intent intent = new Intent(context, DetailActivity.class);
-                    context.startActivity(intent);
-                    break;
-            }
+            Intent intent = new Intent(context, DetailActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("CHARACTER", character);
+            intent.putExtras(bundle);
+            context.startActivity(intent);
         }
     }
 }
