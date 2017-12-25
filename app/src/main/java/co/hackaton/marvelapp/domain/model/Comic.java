@@ -1,15 +1,20 @@
 package co.hackaton.marvelapp.domain.model;
 
+import java.io.Serializable;
+
 /**
  * Created by casa on 14/12/17.
  */
 
-public class Comic {
+public class Comic implements Serializable {
 
-    private int id ;
-    private String title ;
-    private String description ;
-    private String imageCover ;
+    private int id;
+    private String title;
+    private String description;
+    private String imageCover;
+
+    public Comic() {
+    }
 
     public Comic(int id, String title, String description, String imageCover) {
         this.id = id;
