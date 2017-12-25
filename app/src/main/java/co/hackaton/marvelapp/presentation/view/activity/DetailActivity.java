@@ -11,6 +11,8 @@ import com.squareup.picasso.Picasso;
 
 import co.hackaton.marvelapp.R;
 import co.hackaton.marvelapp.domain.model.Character;
+import co.hackaton.marvelapp.domain.model.Comic;
+import co.hackaton.marvelapp.helpers.Constants;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -24,29 +26,49 @@ public class DetailActivity extends AppCompatActivity {
 
         imageViewDetail = findViewById(R.id.imageViewDetail);
         textViewDescription = findViewById(R.id.textViewDescription);
-
-        //Obtiene el objeto Character enviado de la actividad anterior
-        Intent intent = getIntent();
-        Character character = (Character) intent.getSerializableExtra("CHARACTER");
-
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle(character.getName());
-        setSupportActionBar(toolbar);
 
-        showDataCharacter(character);
+        Intent intent = getIntent();
+
+        //Obtiene el objeto recibido y muestra la información de acuerdo al tipo de objeto
+        if (intent.getSerializableExtra(Constants.CHARACTER_KEY) != null) {
+            Character character = (Character) intent.getSerializableExtra(Constants.CHARACTER_KEY);
+            toolbar.setTitle(character.getName());
+            showData(character);
+        } else if (intent.getSerializableExtra(Constants.COMIC_KEY) != null) {
+            Comic comic = (Comic) intent.getSerializableExtra(Constants.COMIC_KEY);
+            toolbar.setTitle(comic.getTitle());
+            showData(comic);
+        } else if (intent.getSerializableExtra(Constants.SERIE_KEY) != null) {
+
+        }
+
+        setSupportActionBar(toolbar);
     }
 
     /**
      * Muestra los datos del Character seleccionado.
      *
-     * @param character
+     * @param object
      */
-    private void showDataCharacter(Character character) {
-        textViewDescription.setText(character.getDescription());
-        Picasso.with(this)
-                .load(character.getThumbnail())
-                .resize(400, 400)
-                .centerCrop()
-                .into(imageViewDetail);
+    private void showData(Object object) {
+        if (object instanceof Character) {
+            Character character = (Character) object;
+            textViewDescription.setText(character.getDescription());
+            Picasso.with(this)
+                    .load(character.getThumbnail())
+                    .resize(400, 400)
+                    .centerCrop()
+                    .into(imageViewDetail);
+
+        } else if (object instanceof Comic) {
+            Comic comic = (Comic) object;
+            textViewDescription.setText(comic.getDescription());
+            Picasso.with(this)
+                    .load(comic.getImageCover())
+                    .centerCrop()
+                    .resize(400, 600)
+                    .into(imageViewDetail);
+        }
     }
 }
