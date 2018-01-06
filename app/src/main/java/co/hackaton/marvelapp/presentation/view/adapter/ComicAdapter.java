@@ -7,11 +7,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import co.hackaton.marvelapp.R;
@@ -23,11 +26,15 @@ import co.hackaton.marvelapp.presentation.view.activity.DetailActivity;
  * Created by christianbarco on 24/12/17.
  */
 
-public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ComicViewHolder> {
-    private List<Comic> comics;
+public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ComicViewHolder> implements Filterable {
+    private List<Comic> allComics;
+    private List<Comic> filterComics;
+    private ComicAdapter.ComicFilter comicFilter;
 
-    public ComicAdapter(List<Comic> comics) {
-        this.comics = comics;
+    public ComicAdapter(List<Comic> allComics) {
+        this.allComics = allComics;
+        this.filterComics = allComics;
+        comicFilter = new ComicFilter(ComicAdapter.this);
     }
 
     @Override
@@ -40,13 +47,18 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ComicViewHol
 
     @Override
     public void onBindViewHolder(ComicAdapter.ComicViewHolder holder, int position) {
-        Comic comic = comics.get(position);
+        Comic comic = filterComics.get(position);
         holder.bindComic(comic);
     }
 
     @Override
     public int getItemCount() {
-        return comics.size();
+        return filterComics.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return comicFilter;
     }
 
     public class ComicViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -84,6 +96,41 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ComicViewHol
             bundle.putSerializable(Constants.COMIC_KEY, comic);
             intent.putExtras(bundle);
             context.startActivity(intent);
+        }
+    }
+
+    public class ComicFilter extends Filter {
+        private ComicAdapter mAdapter;
+
+        private ComicFilter(ComicAdapter mAdapter) {
+            super();
+            this.mAdapter = mAdapter;
+        }
+
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            String charString = constraint.toString();
+            if (charString.isEmpty()) {
+                filterComics = allComics;
+            } else {
+                ArrayList<Comic> filteredList = new ArrayList<>();
+                for (Comic comic : filterComics) {
+                    if (comic.getTitle().toLowerCase().startsWith(charString)) {
+                        filteredList.add(comic);
+                    }
+                }
+                filterComics = filteredList;
+            }
+
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = filterComics;
+            return filterResults;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            filterComics = (List<Comic>) results.values;
+            this.mAdapter.notifyDataSetChanged();
         }
     }
 }

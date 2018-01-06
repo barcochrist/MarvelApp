@@ -11,7 +11,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,6 +20,7 @@ import java.util.List;
 
 import co.hackaton.marvelapp.R;
 import co.hackaton.marvelapp.presentation.view.adapter.CharacterAdapter;
+import co.hackaton.marvelapp.presentation.view.adapter.ComicAdapter;
 import co.hackaton.marvelapp.presentation.view.fragment.CharactersFragment;
 import co.hackaton.marvelapp.presentation.view.fragment.ComicsFragment;
 import co.hackaton.marvelapp.presentation.view.fragment.SeriesFragment;
@@ -108,17 +108,17 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        CharacterAdapter adapter = getCharacterAdapter();
-        adapter.getFilter().filter(newText);
-        return false;
-    }
-
-    public CharacterAdapter getCharacterAdapter() {
-        CharactersFragment fragment = (CharactersFragment) mSectionsPagerAdapter.getItem(0);
-        if (fragment != null) {
-            return fragment.getCharacterAdapter();
+        //De acuerdo al fragmento visible ejecuta la busqueda en el adapter correspondiente
+        CharactersFragment charactersFragment = (CharactersFragment) mSectionsPagerAdapter.getItem(0);
+        ComicsFragment comicsFragment = (ComicsFragment) mSectionsPagerAdapter.getItem(1);
+        if (charactersFragment != null && charactersFragment.getUserVisibleHint()) {
+            CharacterAdapter adapter = charactersFragment.getCharacterAdapter();
+            adapter.getFilter().filter(newText);
+        } else if (comicsFragment != null && comicsFragment.getUserVisibleHint()) {
+            ComicAdapter adapter = comicsFragment.getComicAdapter();
+            adapter.getFilter().filter(newText);
         }
-        return null;
+        return false;
     }
 
     /**

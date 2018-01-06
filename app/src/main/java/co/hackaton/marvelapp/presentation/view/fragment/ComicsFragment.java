@@ -28,7 +28,7 @@ public class ComicsFragment extends Fragment implements ComicListContract.View {
     private OnFragmentInteractionListener mListener;
     private RecyclerView recyclerViewComics;
     private ComicListContract.UserActionListener userActionListener;
-
+    private ComicAdapter comicAdapter;
 
     public ComicsFragment() {
         // Required empty public constructor
@@ -73,10 +73,14 @@ public class ComicsFragment extends Fragment implements ComicListContract.View {
         recyclerViewComics.setItemAnimator(new DefaultItemAnimator());
         recyclerViewComics.setHasFixedSize(true);
 
-        ComicAdapter adapter = new ComicAdapter(userActionListener.getAllComics());
-        recyclerViewComics.setAdapter(adapter);
+        comicAdapter = new ComicAdapter(userActionListener.getAllComics());
+        recyclerViewComics.setAdapter(comicAdapter);
 
         return view;
+    }
+
+    public ComicAdapter getComicAdapter() {
+        return comicAdapter;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
