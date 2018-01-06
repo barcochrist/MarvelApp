@@ -108,10 +108,10 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
             if (charString.isEmpty()) {
                 filterCharacters = allCharacters;
             } else {
-                ArrayList<Character> filteredList = new ArrayList<Character>();
-                for (Character androidVersion : filterCharacters) {
-                    if (androidVersion.getName().toLowerCase().startsWith(charString)) {
-                        filteredList.add(androidVersion);
+                ArrayList<Character> filteredList = new ArrayList<>();
+                for (Character character : filterCharacters) {
+                    if (character.getName().toLowerCase().startsWith(charString)) {
+                        filteredList.add(character);
                     }
                 }
                 filterCharacters = filteredList;
