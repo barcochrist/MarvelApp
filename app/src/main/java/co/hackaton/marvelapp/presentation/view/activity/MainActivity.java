@@ -1,5 +1,7 @@
 package co.hackaton.marvelapp.presentation.view.activity;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -7,19 +9,23 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import co.hackaton.marvelapp.R;
+import co.hackaton.marvelapp.presentation.view.adapter.CharacterAdapter;
 import co.hackaton.marvelapp.presentation.view.fragment.CharactersFragment;
 import co.hackaton.marvelapp.presentation.view.fragment.ComicsFragment;
 import co.hackaton.marvelapp.presentation.view.fragment.SeriesFragment;
 
-public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener {
+public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener, SearchView.OnQueryTextListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -61,8 +67,14 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.searchGeneral).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setSubmitButtonEnabled(true);
+        searchView.setOnQueryTextListener(this);
         return true;
     }
 
@@ -87,6 +99,26 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
     @Override
     public void onTabReselected(TabLayout.Tab tab) {
 
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        CharacterAdapter adapter = getCharacterAdapter();
+        adapter.getFilter().filter(newText);
+        return false;
+    }
+
+    public CharacterAdapter getCharacterAdapter() {
+        CharactersFragment fragment = (CharactersFragment) mSectionsPagerAdapter.getItem(0);
+        if (fragment != null) {
+            return fragment.getCharacterAdapter();
+        }
+        return null;
     }
 
     /**

@@ -1,5 +1,7 @@
 package co.hackaton.marvelapp.presentation.presenter;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +40,7 @@ public class CharacterListPresenter implements CharacterListContract.UserActionL
 
             @Override
             public void error(Exception error) {
-
+                Log.e("loadCharacters", error.getStackTrace().toString());
             }
         });
 

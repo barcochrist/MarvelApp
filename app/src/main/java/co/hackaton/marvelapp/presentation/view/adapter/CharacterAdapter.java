@@ -7,11 +7,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import co.hackaton.marvelapp.R;
@@ -22,11 +25,15 @@ import co.hackaton.marvelapp.presentation.view.activity.DetailActivity;
  * Created by christianbarco on 17/12/17.
  */
 
-public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder> {
-    private List<Character> characters;
+public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder> implements Filterable {
+    private List<Character> allCharacters;
+    private List<Character> filterCharacters;
+    private CharacterFilter characterFilter;
 
-    public CharacterAdapter(List<Character> characters) {
-        this.characters = characters;
+    public CharacterAdapter(List<Character> allCharacters) {
+        this.allCharacters = allCharacters;
+        this.filterCharacters = allCharacters;
+        this.characterFilter = new CharacterFilter(CharacterAdapter.this);
     }
 
     @Override
@@ -39,13 +46,18 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
 
     @Override
     public void onBindViewHolder(CharacterViewHolder holder, int position) {
-        Character character = characters.get(position);
+        Character character = filterCharacters.get(position);
         holder.bindCharacter(character);
     }
 
     @Override
     public int getItemCount() {
-        return characters.size();
+        return filterCharacters.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return characterFilter;
     }
 
     public class CharacterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -78,6 +90,42 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
             bundle.putSerializable("CHARACTER", character);
             intent.putExtras(bundle);
             context.startActivity(intent);
+        }
+    }
+
+
+    public class CharacterFilter extends Filter {
+        private CharacterAdapter mAdapter;
+
+        private CharacterFilter(CharacterAdapter mAdapter) {
+            super();
+            this.mAdapter = mAdapter;
+        }
+
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            String charString = constraint.toString();
+            if (charString.isEmpty()) {
+                filterCharacters = allCharacters;
+            } else {
+                ArrayList<Character> filteredList = new ArrayList<Character>();
+                for (Character androidVersion : filterCharacters) {
+                    if (androidVersion.getName().toLowerCase().startsWith(charString)) {
+                        filteredList.add(androidVersion);
+                    }
+                }
+                filterCharacters = filteredList;
+            }
+
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = filterCharacters;
+            return filterResults;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            filterCharacters = (List<Character>) results.values;
+            this.mAdapter.notifyDataSetChanged();
         }
     }
 }

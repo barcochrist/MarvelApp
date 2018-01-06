@@ -28,6 +28,7 @@ public class CharactersFragment extends Fragment implements CharacterListContrac
     private OnFragmentInteractionListener mListener;
     private RecyclerView recyclerCharacters;
     private CharacterListContract.UserActionListener userActionListener;
+    private CharacterAdapter characterAdapter;
 
     public CharactersFragment() {
         // Required empty public constructor
@@ -66,10 +67,15 @@ public class CharactersFragment extends Fragment implements CharacterListContrac
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         recyclerCharacters.setLayoutManager(gridLayoutManager);
         recyclerCharacters.setItemAnimator(new DefaultItemAnimator());
+        recyclerCharacters.setHasFixedSize(true);
 
-        CharacterAdapter adapter = new CharacterAdapter(userActionListener.getAllCharacters());
-        recyclerCharacters.setAdapter(adapter);
+        characterAdapter = new CharacterAdapter(userActionListener.getAllCharacters());
+        recyclerCharacters.setAdapter(characterAdapter);
         return view;
+    }
+
+    public CharacterAdapter getCharacterAdapter() {
+        return characterAdapter;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
