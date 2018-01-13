@@ -4,14 +4,14 @@ package co.hackaton.marvelapp.domain.model;
  * Created by casa on 14/12/17.
  */
 
-public class Series {
+public class Movie {
 
     private int id ;
     private String title ;
     private String description ;
     private String image ;
 
-    public Series(int id, String title, String description, String image) {
+    public Movie(int id, String title, String description, String image) {
         this.id = id;
         this.title = title;
         this.description = description;

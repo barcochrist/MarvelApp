@@ -23,7 +23,7 @@ import co.hackaton.marvelapp.presentation.view.adapter.CharacterAdapter;
 import co.hackaton.marvelapp.presentation.view.adapter.ComicAdapter;
 import co.hackaton.marvelapp.presentation.view.fragment.CharactersFragment;
 import co.hackaton.marvelapp.presentation.view.fragment.ComicsFragment;
-import co.hackaton.marvelapp.presentation.view.fragment.SeriesFragment;
+import co.hackaton.marvelapp.presentation.view.fragment.MoviesFragment;
 
 public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener, SearchView.OnQueryTextListener {
 
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mSectionsPagerAdapter.addFragment(CharactersFragment.newInstance(), getString(R.string.title_section1));
         mSectionsPagerAdapter.addFragment(ComicsFragment.newInstance(), getString(R.string.title_section2));
-        mSectionsPagerAdapter.addFragment(SeriesFragment.newInstance(), getString(R.string.title_section3));
+        mSectionsPagerAdapter.addFragment(MoviesFragment.newInstance(), getString(R.string.title_section3));
         // Set up the ViewPager with the sections adapter.
         mViewPager.setAdapter(mSectionsPagerAdapter);
     }

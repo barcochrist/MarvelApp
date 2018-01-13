@@ -1,6 +1,5 @@
 package co.hackaton.marvelapp.presentation.view.fragment;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,12 +12,12 @@ import co.hackaton.marvelapp.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link SeriesFragment.OnFragmentInteractionListener} interface
+ * {@link MoviesFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link SeriesFragment#newInstance} factory method to
+ * Use the {@link MoviesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SeriesFragment extends Fragment {
+public class MoviesFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -26,7 +25,7 @@ public class SeriesFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public SeriesFragment() {
+    public MoviesFragment() {
         // Required empty public constructor
     }
 
@@ -37,8 +36,8 @@ public class SeriesFragment extends Fragment {
      * @return A new instance of fragment SeriesFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SeriesFragment newInstance() {
-        SeriesFragment fragment = new SeriesFragment();
+    public static MoviesFragment newInstance() {
+        MoviesFragment fragment = new MoviesFragment();
         return fragment;
     }
 
