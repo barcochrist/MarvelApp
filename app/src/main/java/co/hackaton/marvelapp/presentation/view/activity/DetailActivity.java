@@ -39,7 +39,7 @@ public class DetailActivity extends AppCompatActivity {
             Comic comic = (Comic) intent.getSerializableExtra(Constants.COMIC_KEY);
             toolbar.setTitle(comic.getTitle());
             showData(comic);
-        } else if (intent.getSerializableExtra(Constants.SERIE_KEY) != null) {
+        } else if (intent.getSerializableExtra(Constants.MOVIE_KEY) != null) {
 
         }
 
