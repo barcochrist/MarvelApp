@@ -40,9 +40,8 @@ public class MovieFirebaseRepository implements MovieRepository {
                 for (DataSnapshot dataSnapshoi : dataSnapshot.getChildren()) {
                     Movie movie = dataSnapshoi.getValue(Movie.class);
                     list.add(movie);
-                    //TODO Probar modificando (Sacando) esto del FOR
-                    callback.success(list);
                 }
+                callback.success(list);
             }
 
             @Override

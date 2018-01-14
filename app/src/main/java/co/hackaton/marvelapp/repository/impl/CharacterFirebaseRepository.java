@@ -39,8 +39,8 @@ public class CharacterFirebaseRepository implements CharacterRepository {
                 for (DataSnapshot characterDataSnapshot : dataSnapshot.getChildren()) {
                     Character character = characterDataSnapshot.getValue(Character.class);
                     characters.add(character);
-                    callback.success(characters);
                 }
+                callback.success(characters);
             }
 
             @Override

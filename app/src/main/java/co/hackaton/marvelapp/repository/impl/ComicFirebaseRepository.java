@@ -40,8 +40,8 @@ public class ComicFirebaseRepository implements ComicRepository {
                 for (DataSnapshot dataSnapshoi : dataSnapshot.getChildren()) {
                     Comic comic = dataSnapshoi.getValue(Comic.class);
                     list.add(comic);
-                    callback.success(list);
                 }
+                callback.success(list);
             }
 
             @Override
