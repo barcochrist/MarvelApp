@@ -5,8 +5,8 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="action_search">Buscar</string>
     <string name="title_section1">Personajes</string>
-    <string name="title_section2">Comics</string>
-    <string name="title_section3">Series</string>
-    <string name="title_activity_detail">DetailActivity</string>
+    <string name="title_section2">Historietas</string>
+    <string name="title_section3">Películas</string>
+    <string name="title_activity_detail">Detalle</string>
     <string name="search_hint">Busqueda</string>
 </resources>

@@ -12,6 +12,7 @@ import com.squareup.picasso.Picasso;
 import co.hackaton.marvelapp.R;
 import co.hackaton.marvelapp.domain.model.Character;
 import co.hackaton.marvelapp.domain.model.Comic;
+import co.hackaton.marvelapp.domain.model.Movie;
 import co.hackaton.marvelapp.helpers.Constants;
 
 public class DetailActivity extends AppCompatActivity {
@@ -40,7 +41,9 @@ public class DetailActivity extends AppCompatActivity {
             toolbar.setTitle(comic.getTitle());
             showData(comic);
         } else if (intent.getSerializableExtra(Constants.MOVIE_KEY) != null) {
-
+            Movie movie = (Movie) intent.getSerializableExtra(Constants.MOVIE_KEY);
+            toolbar.setTitle(movie.getTitle());
+            showData(movie);
         }
 
         setSupportActionBar(toolbar);
@@ -49,7 +52,7 @@ public class DetailActivity extends AppCompatActivity {
     /**
      * Muestra los datos del Character seleccionado.
      *
-     * @param object
+     * @param object objeto del tipo Character, Comic o Movie
      */
     private void showData(Object object) {
         if (object instanceof Character) {
@@ -66,6 +69,14 @@ public class DetailActivity extends AppCompatActivity {
             textViewDescription.setText(comic.getDescription());
             Picasso.with(this)
                     .load(comic.getImageCover())
+                    .centerCrop()
+                    .resize(400, 600)
+                    .into(imageViewDetail);
+        } else if (object instanceof Movie) {
+            Movie movie = (Movie) object;
+            textViewDescription.setText(movie.getDescription());
+            Picasso.with(this)
+                    .load(movie.getImageCover())
                     .centerCrop()
                     .resize(400, 600)
                     .into(imageViewDetail);

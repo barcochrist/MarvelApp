@@ -21,6 +21,7 @@ import java.util.List;
 import co.hackaton.marvelapp.R;
 import co.hackaton.marvelapp.presentation.view.adapter.CharacterAdapter;
 import co.hackaton.marvelapp.presentation.view.adapter.ComicAdapter;
+import co.hackaton.marvelapp.presentation.view.adapter.MovieAdapter;
 import co.hackaton.marvelapp.presentation.view.fragment.CharactersFragment;
 import co.hackaton.marvelapp.presentation.view.fragment.ComicsFragment;
 import co.hackaton.marvelapp.presentation.view.fragment.MoviesFragment;
@@ -111,12 +112,17 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         //De acuerdo al fragmento visible ejecuta la busqueda en el adapter correspondiente
         CharactersFragment charactersFragment = (CharactersFragment) mSectionsPagerAdapter.getItem(0);
         ComicsFragment comicsFragment = (ComicsFragment) mSectionsPagerAdapter.getItem(1);
+        MoviesFragment moviesFragment = (MoviesFragment) mSectionsPagerAdapter.getItem(2);
+
         if (charactersFragment != null && charactersFragment.getUserVisibleHint()) {
             CharacterAdapter adapter = charactersFragment.getCharacterAdapter();
             adapter.getFilter().filter(newText);
         } else if (comicsFragment != null && comicsFragment.getUserVisibleHint()) {
             ComicAdapter adapter = comicsFragment.getComicAdapter();
             adapter.getFilter().filter(newText);
+        } else if (moviesFragment != null && moviesFragment.getUserVisibleHint()) {
+            MovieAdapter movieAdapter = moviesFragment.getMovieAdapter();
+            movieAdapter.getFilter().filter(newText);
         }
         return false;
     }
