@@ -9,4 +9,19 @@
     <string name="title_section3">Películas</string>
     <string name="title_activity_detail">Detalle</string>
     <string name="search_hint">Busqueda</string>
+    <string name="title_activity_login">Ingresar</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Correo</string>
+    <string name="prompt_password">Contraseña</string>
+    <string name="action_sign_in">Ingresar</string>
+    <string name="action_sign_in_short">Ingresar</string>
+    <string name="error_invalid_email">Correo invalido</string>
+    <string name="error_invalid_password">Contraseña muy corta</string>
+    <string name="error_incorrect_password">Contraseña incorrecta</string>
+    <string name="error_field_required">Este campo es requerido</string>
+    <string name="permission_rationale">"Permisos de contactos son necesarios para proporcionar terminaciones de correo electrónico"</string>
+    <string name="forgot_password">Olvide mi contraseña</string>
+    <string name="remember_user_in_device">Recordar mi usuario en este dispositivo</string>
+    <string name="sign_up">Registrarse</string>
 </resources>
